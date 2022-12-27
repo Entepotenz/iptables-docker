@@ -1,0 +1,13 @@
+[Unit]
+Description=Simple firewall script with docker rules preserve function
+After=network.target docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/usr/local/sbin/
+ExecStart=/usr/local/sbin/ip6tables-docker.sh start
+ExecStop=/usr/local/sbin/ip6tables-docker.sh stop
+
+[Install]
+WantedBy=multi-user.target

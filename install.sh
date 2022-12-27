@@ -35,15 +35,18 @@ chmod 600 /usr/local/sbin/awk.firewall
 echo "Create systemd unit"
 
 cp "$SCRIPT_DIR/src/iptables-docker.service" /etc/systemd/system/
+cp "$SCRIPT_DIR/src/ip6tables-docker.service" /etc/systemd/system/
 
 echo "Enable iptables-docker.service"
 
 systemctl daemon-reload
 systemctl enable iptables-docker
+systemctl enable ip6tables-docker
 
 echo "start iptables-docker.service"
 
 systemctl start iptables-docker
+systemctl start ip6tables-docker
 
 if [ $iptables_rc -ne 0 ]; then
     echo "Reboot your machine"
